@@ -1,0 +1,25 @@
+
+.card {
+    cursor: pointer;
+}
+
+.offcanvas.offcanvas-end {
+    width: 275px !important;
+}
+#movieNameInline {
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* You can add global styles to this file, and also import other style files */
+input::-webkit-outer-spin-button,
+
+input::-webkit-inner-spin-button {
+
+  -webkit-appearance: none;
+
+  margin: 0;
+
+}

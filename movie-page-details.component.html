@@ -1,0 +1,169 @@
+<router-outlet></router-outlet>
+
+
+<nav class="navbar fixed-top navbar-dark bg-dark " data-bs-theme="dark">
+  <div class="container-fluid">
+    <h1 style="color: aliceblue;">MyIMDB</h1>
+    <button routerLink="/movies-dashboard" routerLinkActive="active" style="color:aliceblue;" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      Back
+    </button>
+    </div>
+</nav>
+<div  class="container-fluid" >
+  <div class="row" style="padding-top: 75px;">
+    <div style="background-color: black;" class="card">
+        <div class="row">
+            <div class="col-3" *ngFor="let row of movie">
+                <a href="#"><img style="height: 289px; width: 280px;" src="{{row.image}}" alt="cover" class="card-img-left" /></a>
+                <h6 style="font-size: 30px; font-style: italic; color: aliceblue;margin-top: 30px;">MyIMDB Review :</h6>
+                <p class="text-bg-light" style="border-radius: 10px; padding: 10px;font-style: oblique;color: aliceblue; text-align: justify;">{{row.Commends}}</p>
+                
+                <div class="text-bg-light" style="border-radius: 10px; padding: 10px;font-style: oblique;color: aliceblue;">    
+                  <h4>Your Rating</h4>
+                  <form #movieform="ngForm" method="post" action="#action-url">
+                  <br>
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Name*</label>
+                    <input type="text"  class="form-control" [(ngModel)]="UserName" placeholder="Name" name="username" #username="ngModel" id="username" required >
+                    <div class="form-text text-danger" *ngIf="username.errors?.['required'] && (username.touched || username.dirty)"> Name is Required*</div>
+                  </div>
+                  
+                  <div class="stars" style="height: 2px;">
+                    <ngx-star-rating style="font-size: 25px !important;" [(ngModel)]="UserRating" [id]="'UserRating'"  name="UserRating"></ngx-star-rating>
+                    <div style="text-align: center;">Rating: {{ UserRating }}</div>
+                    </div>
+                                  
+                    <div class="clear"></div> 
+                    <hr class="survey-hr"> 
+                  <label for="usercommends"> Express Your Movie Experience:</label>
+                  <textarea cols="75" class="form-control" [(ngModel)]="UserCommends" name="usercommends" #usercommends="ngModel" id="usercommends" rows="5" style="width:100%;"></textarea>
+                  <br>
+                  <span class="badge text-bg-light" style="background-color: black;border-radius: 5px; padding: px;">*Fill All The Details to Submit</span>
+                  <hr>
+                    <div class="clear"></div> 
+                    <button class="btn btn-dark"(click)="postUserReview()">Submit</button>
+                  </form>
+                  </div>
+            </div>
+            <div  class="col-9" *ngFor="let row of movie">
+                <div style="color: aliceblue;">
+                <h1  style="font-style: italic;">{{row.MovieName}}</h1>
+                <h6 class="badge text-bg-light"  style="border-radius: 10px; padding: px">Year of Release : {{row.YearOfRelease}}</h6>
+                <br>
+                <h6 class="badge text-bg-light" style="border-radius: 10px; padding: px" >{{row.ShortDescript}}</h6>
+                <br>
+                <h6 class="badge text-bg-light" style="border-radius: 10px; padding: px">Director : {{row.Director}}</h6>
+                <br>
+                <h6 class="badge text-bg-light" style="border-radius: 10px; padding: px">Actors : {{row.Actors}}</h6>
+                <br>
+                <h6 class="badge text-bg-light" style="border-radius: 10px; padding: px">Producer : {{row.Producer}}</h6>
+                <br>
+                <h6 class="badge text-bg-light" style="border-radius: 10px; padding: px">IMDB Rating : {{row.Rating}}/5</h6>
+                <h6 style="font-size: 30px; font-style: italic;">Story :</h6>
+                <p class="text-bg-light" style="border-radius: 10px; padding: 10px; font-style: oblique; text-align: justify;">{{row.Story}}</p>
+                <h6 style="font-size: 30px; font-style: italic; color: aliceblue;margin-top: 30px;">User Review :</h6>  
+           
+                <!-- <div style="font-size: 15px; font-style: italic; color: aliceblue;margin-top: 30px;">UserRating:</div> -->
+        
+                <span *ngFor="let rows of moviereview"> 
+                <div style="padding-top: 20px;">          
+              <div class="text-bg-light" style="border-radius: 10px; padding: 10px;font-style: oblique;color: aliceblue;">
+                
+                <p  style="font-style:oblique;">Name : {{rows.UserName}} <span class="pull-right">Rating: {{rows.UserRating}}</span> </p>
+                <hr>
+                <p>Commends : {{rows.UserCommends}}</p>
+                
+            </div> </div>
+          </span>  
+            </div>
+            </div>
+            <div  class="col-9" *ngFor="let row of moviereview">
+
+            </div>
+
+        </div>
+    </div>
+        <!-- <div class="column2">
+            <div>Story</div>
+        <p>Amar, the head of a black-ops team, is summoned by Police Chief Jose to bring justice to
+             a group of masked vigilantes, who have killed Stephen Raj (following his arrest and subsequent 
+             release after being busted for helping Adaikalam and Anbu in Kaithi), ACP Prabhanjan and his foster 
+             father, Karnan. Amar leads the investigation by digging into Karnan's life, as his murder seems out of 
+             place, since Karnan was a common man and the other two were higher officials in the Narcotics division. 
+             He learns about Karnan's recent addictions to alcohol, drugs and prostitutes, while at the same time 
+             being very protective of his infant foster grandson. While investigating, Amar about two missing containers
+              of drugs being hunted by Sandhanam, who runs a much bigger drug syndicate than Adaikalam, named Vetti Vagaiyara.
+               The two containers had to be delivered to his cold-blooded smuggler boss 'Rolex', whose identity is unknown.
+                If the drugs are delivered, Rolex will help Sandhanam form his own government; if not, Sandhanam and his family
+                 will be killed.</p>
+      </div>
+</div>
+   -->
+
+ <!-- <div class="movie-card"> -->
+    <!-- <div class="container"> -->
+      
+      <!-- <a href="#"><img src="https://m.media-amazon.com/images/M/MV5BMjAxZDEyZTUtMTdiMC00M2FkLWFlYWItZTQ3NWQzNzY2NDdjXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg" alt="cover" class="card-img-left" /></a> -->
+          
+      <!-- <div class="hero">
+              
+        <div class="details">
+        
+          <div class="title1">The Hobbit <span>PG-13</span></div>
+  
+          <div class="title2">Vikram</div>     -->
+          
+          <!-- <fieldset class="rating">
+      <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+      <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+      <input type="radio" id="star4" name="rating" value="4" checked /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+      <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+      <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+      <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+      <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+      <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+      <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+      <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+    </fieldset> -->
+          
+          <!-- <span class="likes">109 likes</span> -->
+          
+        <!-- </div> end details -->
+        
+      <!-- </div> end hero -->
+      
+      <!-- <div class="description">
+        
+        <div class="column1">
+          <span class="tag">action</span>
+          <span class="tag">fantasy</span>
+          <span class="tag">adventure</span>
+        </div> end column1
+        
+        <div class="column2">
+          <div>Story</div>
+          <p>Amar, the head of a black-ops team, is summoned by Police Chief Jose to bring justice to a group of masked vigilantes, who have killed Stephen Raj (following his arrest and subsequent release after being busted for helping Adaikalam and Anbu in Kaithi), ACP Prabhanjan and his foster father, Karnan. Amar leads the investigation by digging into Karnan's life, as his murder seems out of place, since Karnan was a common man and the other two were higher officials in the Narcotics division. He learns about Karnan's recent addictions to alcohol, drugs and prostitutes, while at the same time being very protective of his infant foster grandson. While investigating, Amar about two missing containers of drugs being hunted by Sandhanam, who runs a much bigger drug syndicate than Adaikalam, named Vetti Vagaiyara. The two containers had to be delivered to his cold-blooded smuggler boss 'Rolex', whose identity is unknown. If the drugs are delivered, Rolex will help Sandhanam form his own government; if not, Sandhanam and his family will be killed.</p> -->
+          
+          
+          
+          
+        <!-- </div> end column2 -->
+      <!-- </div> end description -->
+      
+     
+    <!-- </div> end container -->
+  <!-- </div> end movie-card --> 
+  <!-- <rating ></rating> -->
+ <!-- <ngb-rating [max]="5"></ngb-rating> -->
+ <!-- <div class="stars">
+  <ngx-star-rating [formControl]="rating3" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
+  <div style="text-align: center;">Rating: {{ rating3 }}</div>
+  </div> -->
+
+   <!-- <span class="star-rating">
+                    <input type="radio" name="rating1" value="1"><i></i>
+                    <input type="radio" name="rating1" value="2"><i></i>
+                    <input type="radio" name="rating1" value="3"><i></i>
+                    <input type="radio" name="rating1" value="4"><i></i>
+                    <input type="radio" name="rating1" value="5"><i></i>
+                  </span> -->
